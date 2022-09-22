@@ -31,10 +31,9 @@ export default function Tickets() {
                 {tickets &&
                     <div className='tickets'>
                         {tickets.map(ticket => (
-                            <TicketCard key={ticket.id} ticket={ticket}/>
+                            <TicketCard key={ticket.id} ticket={ticket} />
                         ))}
                     </div>
-                
                 }
             </main>
         </>
