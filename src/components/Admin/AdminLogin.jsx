@@ -1,8 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-export default function AdminLogin() {
+export default function AdminLogin({ supabase }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        const login = async () => {
+            const { user, error } = await supabase.auth.signIn({
+                email,
+                password
+            })
+            if (error) {
+                console.log(error)
+            }
+            if (user) {
+                console.log(user)
+            }
+        }
+        login()
+    }
 
     return (
         <div className='m-5'>
@@ -26,7 +43,7 @@ export default function AdminLogin() {
                         value={password}
                     />
                 </div>
-                <button className='btn btn-info'>Login</button>
+                <button className='btn btn-info' onClick={handleClick}>Login</button>
             </form>
         </div>
     )

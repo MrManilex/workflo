@@ -4,6 +4,8 @@ import Admin from '../Admin/Admin'
 import Landing from '../Landing/Landing'
 import Tickets from '../Tickets/Tickets'
 
+import supabase from '../../config/supabaseClient'
+
 function App() {
   return (
     <>
@@ -15,7 +17,7 @@ function App() {
         <Route path='/tickets' element={<Tickets />} />
 
         {/* admin routes  */}
-        <Route path='/admin/login-signup' element={<Admin />} />
+        <Route path='/admin/login-signup' element={<Admin supabase={supabase}/>} />
       </Routes>
     </>
   )
