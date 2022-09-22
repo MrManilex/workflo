@@ -1,19 +1,17 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../../components/Navbar/Navbar'
 import Landing from '../Landing/Landing'
-import './App.css'
-import supabase from '../../config/supabaseClient'
+import Tickets from '../Tickets/Tickets'
 
 function App() {
-
-  console.log(supabase)
-
   return (
     <>
       <Navbar />
       {/* routes */}
       <Routes>
         <Route path='/' element={<Landing />} />
+        {/* correct path for viewing ticket... /:project/:ticketId */}
+        <Route path='/tickets' element={<Tickets />} />
       </Routes>
     </>
   )
