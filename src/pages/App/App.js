@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       {/* routes */}
       <Routes>
-        <Route path='/' element={<Landing />} />
+        <Route path='/' element={<Landing supabase={supabase}/>} />
         {/* correct path for viewing ticket... /:project/:ticketId */}
         <Route path='/tickets' element={<Tickets />} />
 

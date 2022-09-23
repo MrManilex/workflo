@@ -1,10 +1,10 @@
 import React from 'react'
-import LoginSignup from '../../components/LoginSignUp/LoginSignup'
+import Auth from '../../components/Auth/Auth'
 
-export default function Landing() {
+export default function Landing({ supabase }) {
     return (
         <main className='text-center'>
-            <LoginSignup />
+            <Auth supabase={supabase} />
         </main>
     )
 }
