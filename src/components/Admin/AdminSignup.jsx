@@ -4,6 +4,7 @@ export default function AdminSignup({ supabase }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [organization, setOrganization] = useState('')
+    const [fetchError, setFetchError] = useState('')
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -13,10 +14,11 @@ export default function AdminSignup({ supabase }) {
                 password
             })
             if (error) {
-                console.log(error)
+                setFetchError(error)
             }
             if (user) {
                 console.log(user)
+                setFetchError(null)
             }
         }
         signup()
@@ -54,6 +56,7 @@ export default function AdminSignup({ supabase }) {
                     />
                 </div>
                 <button className='btn btn-info' onClick={handleClick}>Signup</button>
+                {fetchError && <p>{fetchError.message}</p>}
             </form>
         </div>
     );
