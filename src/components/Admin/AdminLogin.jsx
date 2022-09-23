@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 export default function AdminLogin({ supabase }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [fetchError, setFetchError] = useState('');
+    const [fetchError, setFetchError] = useState('')
 
     const handleClick = (e) => {
         e.preventDefault()
