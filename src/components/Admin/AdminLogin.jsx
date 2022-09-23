@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 export default function AdminLogin({ supabase }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [fetchError, setFetchError] = useState('');
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -12,10 +13,11 @@ export default function AdminLogin({ supabase }) {
                 password
             })
             if (error) {
-                console.log(error)
+                setFetchError(error)
             }
             if (user) {
                 console.log(user)
+                setFetchError(null)
             }
         }
         login()
@@ -44,6 +46,7 @@ export default function AdminLogin({ supabase }) {
                     />
                 </div>
                 <button className='btn btn-info' onClick={handleClick}>Login</button>
+                {fetchError && <p>{fetchError.message}</p>}
             </form>
         </div>
     )
