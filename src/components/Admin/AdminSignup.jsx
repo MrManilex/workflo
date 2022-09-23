@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function AdminSignup({ supabase }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [organization, setOrganization] = useState('')
+    // const [organization, setOrganization] = useState('')
     const [fetchError, setFetchError] = useState('')
+
+    const navigate = useNavigate()
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -19,16 +22,17 @@ export default function AdminSignup({ supabase }) {
             if (user) {
                 console.log(user)
                 setFetchError(null)
+                navigate('/admin/projects')
             }
         }
         signup()
     }
 
     return (
-        <div>
+        <div className='m-5'>
             <form className='text-center flex-col'>
                 <h2 className="text-4xl m-5">Signup</h2>
-                <div>
+                {/* <div>
                     <input
                         type="email"
                         placeholder="Organization"
@@ -36,12 +40,12 @@ export default function AdminSignup({ supabase }) {
                         onChange={(e) => setOrganization(e.target.value)}
                         value={organization}
                     />
-                </div>
+                </div> */}
                 <div>
                     <input
                         type="email"
                         placeholder="Email"
-                        className="input input-bordered w-full max-w-xs mb-5"
+                        className="input input-bordered w-full max-w-xs my-5"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                     />
