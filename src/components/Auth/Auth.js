@@ -7,7 +7,7 @@ export default function Auth() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault()
 
         try {
@@ -32,7 +32,7 @@ export default function Auth() {
                     <p className="text-3xl m-5">Loading</p>
                 </>
                 :
-                <form onSubmit={handleLogin} className='text-center flex-col'>
+                <form onSubmit={handleSignup} className='text-center flex-col'>
                     <h1 className="text-4xl m-5">Sign Up</h1>
                     {error && <p>{error}</p>}
                     <div>
