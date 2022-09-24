@@ -104,11 +104,6 @@ const Account = ({ session, supabase }) => {
                             Update Profile
                         </button>
                     </div>
-                    <div className="text-center">
-                        <button type="button" onClick={() => supabase.auth.signOut()}>
-                            Sign Out
-                        </button>
-                    </div>
                 </form>
             )}
 

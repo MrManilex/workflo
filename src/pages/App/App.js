@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar session={session} supabase={supabase}/>
       {/* routes */}
       <Routes>
 
@@ -31,7 +31,7 @@ function App() {
         <Route path='/tickets' element={<Tickets supabase={supabase} />} />
 
         {/* admin routes  */}
-        <Route path='/admin/login-signup' element={<Admin supabase={supabase} />} />
+        <Route path='/projects' element={session ? <Admin supabase={supabase} /> : <Landing supabase={supabase} />} />
       </Routes>
     </>
   )

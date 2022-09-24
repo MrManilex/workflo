@@ -8,8 +8,9 @@ export default function Admin({ supabase }) {
             <main className='text-center'>
                 <h1 className='text-4xl mt-5'>Admin Portal</h1>
                 <div className='flex place-content-evenly'>
-                    <AdminLogin supabase={supabase}/>
-                    <AdminSignup supabase={supabase}/>
+                    {/* <AdminLogin supabase={supabase}/>
+                    <AdminSignup supabase={supabase}/> */}
+                    admin stuff here
                 </div>
             </main>
         </>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar({ session, supabase }) {
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -43,7 +43,17 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link className="btn">Get started</Link>
+                {session ?
+                    <>
+                        <button type="button" className='btn btn-info' onClick={() => supabase.auth.signOut()}>
+                            Sign Out
+                        </button>
+                    </>
+                    :
+                    <>
+                        <Link to='/' className="btn btn-info">Login/Signup</Link>
+                    </>
+                }
             </div>
         </div>
     )
