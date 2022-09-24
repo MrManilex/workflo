@@ -18,43 +18,44 @@ export default function Auth() {
             if (error) throw error
             // alert('Check your email for the login link!')
         } catch (error) {
-            alert(error.error_description || error.message)
+            alert(error)
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <div className="">
-            <div className="">
-                <h1 className="">Login in</h1>
-                <p className="">Sign in via magic link with your email below</p>
-                {loading ?
-                    <>
-                        <p>Sending link...</p>
-                    </>
-                    :
-                    <form onSubmit={handleLogin}>
+        <div className="m-5">
+            {loading ?
+                <>
+                    <p>Signing Up</p>
+                </>
+                :
+                <form onSubmit={handleLogin} className='text-center flex-col'>
+                    <h1 className="text-4xl m-5">Sign Up</h1>
+                    <div>
                         <input type="email"
                             name="email"
-                            className=""
+                            className="input input-bordered w-full max-w-xs my-5"
                             placeholder="your@email.com"
                             id="website"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                    </div>
+                    <div>
                         <input type="password"
                             name="password"
-                            className=""
+                            className="input input-bordered w-full max-w-xs mb-8"
                             placeholder="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button className="btn btn-primary">Sign Up</button>
-                    </form>
-                }
-            </div>
+                    </div>
+                    <button className="btn btn-info">Sign Up</button>
+                </form>
+            }
         </div>
     )
 }
