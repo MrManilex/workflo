@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Account = ({ session, supabase }) => {
     const [loading, setLoading] = useState(true)
@@ -6,6 +7,8 @@ const Account = ({ session, supabase }) => {
     const [website, setWebsite] = useState(null)
     const [isAdmin, setIsAdmin] = useState(false)
     const [error, setError] = useState('')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getProfile()
@@ -26,6 +29,7 @@ const Account = ({ session, supabase }) => {
                 setUsername(data.username)
                 setWebsite(data.website)
                 setIsAdmin(data.admin)
+                navigate('/projects')
             }
 
         } catch (error) {
