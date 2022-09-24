@@ -4,6 +4,8 @@ const Account = ({ session, supabase }) => {
     const [loading, setLoading] = useState(true)
     const [username, setUsername] = useState(null)
     const [website, setWebsite] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [error, setError] = useState('')
 
     useEffect(() => {
         getProfile()
@@ -16,17 +18,18 @@ const Account = ({ session, supabase }) => {
 
             let { data, error, status } = await supabase
                 .from('profiles')
-                .select(`username, website, avatar_url`)
+                .select(`username, website, avatar_url, admin`)
                 .eq('id', user.id)
                 .single()
 
             if (data) {
                 setUsername(data.username)
                 setWebsite(data.website)
+                setIsAdmin(data.admin)
             }
 
         } catch (error) {
-            alert(error.message)
+            setError(error.message)
         } finally {
             setLoading(false)
         }
@@ -43,7 +46,8 @@ const Account = ({ session, supabase }) => {
                 id: user.id,
                 username,
                 website,
-                updated_at: new Date()
+                updated_at: new Date(),
+                admin: isAdmin
             }
 
             let { error } = await supabase.from("profiles")
@@ -53,7 +57,7 @@ const Account = ({ session, supabase }) => {
                 throw error;
             }
         } catch (error) {
-            alert(error.message)
+            setError(error.message)
         } finally {
             setLoading(false)
         }
@@ -84,7 +88,14 @@ const Account = ({ session, supabase }) => {
                             onChange={(e) => setWebsite(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <label className="label cursor-pointer">
+                        <span className="label-text">Admin</span>
+                        <input type="checkbox"
+                            className="checkbox checkbox-primary"
+                            onChange={(e) => setIsAdmin(!isAdmin)}
+                        />
+                    </label>
+                    <div>
                         <button disabled={loading}>
                             Update Profile
                         </button>

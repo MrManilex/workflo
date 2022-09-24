@@ -25,6 +25,24 @@ export default function Auth() {
         }
     }
 
+    const handleLogin = async (e) => {
+        e.preventDefault()
+
+        try {
+            setLoading(true)
+            const { error } = await supabase.auth.signIn({
+                email,
+                password
+            })
+            if (error) throw error
+            // alert('Check your email for the login link!')
+        } catch (error) {
+            setError(error.error_description || error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="m-5">
             {loading ?
@@ -58,9 +76,8 @@ export default function Auth() {
                         </div>
                         <button className="btn btn-info">Sign Up</button>
                     </form>
-                    <button className="btn btn-ghost mt-4">Login</button>
+                    <button className="btn btn-ghost mt-4" onClick={handleLogin}>Login</button>
                 </>
-                
             }
         </div>
     )
