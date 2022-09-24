@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import supabase from '../../config/supabaseClient'
 import TicketCard from '../../components/TicketCard/TicketCard'
 
-export default function Tickets() {
+export default function Tickets({ supabase }) {
     const [fetchError, setFetchError] = useState(null)
     const [tickets, setTickets] = useState(null)
 

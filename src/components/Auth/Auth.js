@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import supabase from '../../config/supabaseClient'
+import { useState, useEffect } from 'react'
+import { supabase } from '../../config/supabaseClient'
 
 export default function Auth() {
     const [loading, setLoading] = useState(false)
@@ -39,7 +39,7 @@ export default function Auth() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <button className="btn btn-primary" >Send link</button>
+                        <button className="btn btn-primary">Send link</button>
                     </form>
                 }
             </div>
