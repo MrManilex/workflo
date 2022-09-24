@@ -12,6 +12,9 @@ const Account = ({ session, supabase }) => {
 
     useEffect(() => {
         getProfile()
+        if (username !== null || isAdmin === true){
+            navigate('/projects')
+        }
     }, [session])
 
     const getProfile = async () => {
@@ -26,10 +29,10 @@ const Account = ({ session, supabase }) => {
                 .single()
 
             if (data) {
+                console.log(data)
                 setUsername(data.username)
                 setWebsite(data.website)
                 setIsAdmin(data.admin)
-                navigate('/projects')
             }
 
         } catch (error) {
@@ -73,7 +76,7 @@ const Account = ({ session, supabase }) => {
                 'Saving ...'
             ) : (
                 <form onSubmit={updateProfile} >
-                    {/* <div>Email: {session.user.email}</div> */}
+                    <div>Email: {session.user.email}</div>
                     <div>
                         <input type="text"
                             name="text"
@@ -96,6 +99,7 @@ const Account = ({ session, supabase }) => {
                         <span className="label-text">Admin</span>
                         <input type="checkbox"
                             className="checkbox checkbox-primary"
+                            // change checkbox to checked if admin === true
                             onChange={(e) => setIsAdmin(!isAdmin)}
                         />
                     </label>
