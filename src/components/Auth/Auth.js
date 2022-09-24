@@ -5,6 +5,7 @@ export default function Auth() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -18,7 +19,7 @@ export default function Auth() {
             if (error) throw error
             // alert('Check your email for the login link!')
         } catch (error) {
-            alert(error)
+            setError(error.error_description || error.message)
         } finally {
             setLoading(false)
         }
@@ -28,11 +29,12 @@ export default function Auth() {
         <div className="m-5">
             {loading ?
                 <>
-                    <p>Signing Up</p>
+                    <p className="text-3xl m-5">Loading</p>
                 </>
                 :
                 <form onSubmit={handleLogin} className='text-center flex-col'>
                     <h1 className="text-4xl m-5">Sign Up</h1>
+                    {error && <p>{error}</p>}
                     <div>
                         <input type="email"
                             name="email"
