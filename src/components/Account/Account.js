@@ -12,9 +12,6 @@ const Account = ({ session, supabase }) => {
 
     useEffect(() => {
         getProfile()
-        // if (username !== null && website === null) {
-        //     navigate('/projects')
-        // }
     }, [session])
 
     const getProfile = async () => {
@@ -79,9 +76,9 @@ const Account = ({ session, supabase }) => {
     }
 
     return (
-        <div aria-live="polite" >
+        <div className="text-center">
             {loading ? (
-                'Saving ...'
+                'loading...'
             ) : (
                 <form onSubmit={updateProfile} >
                     <div>Email: {session.user.email}</div>
