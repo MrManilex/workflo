@@ -12,9 +12,9 @@ const Account = ({ session, supabase }) => {
 
     useEffect(() => {
         getProfile()
-        if (username !== null || isAdmin === true){
-            navigate('/projects')
-        }
+        // if (username !== null && website === null) {
+        //     navigate('/projects')
+        // }
     }, [session])
 
     const getProfile = async () => {
@@ -29,10 +29,12 @@ const Account = ({ session, supabase }) => {
                 .single()
 
             if (data) {
-                console.log(data)
                 setUsername(data.username)
                 setWebsite(data.website)
                 setIsAdmin(data.admin)
+            }
+            if (data.username !== null) {
+                navigate('/projects')
             }
 
         } catch (error) {
@@ -44,10 +46,15 @@ const Account = ({ session, supabase }) => {
 
     const updateProfile = async (e) => {
         e.preventDefault()
+        
+        if ( username === null ) {
+            setError('Please enter a username')
+            return
+        }
 
         try {
             setLoading(true)
-            const user = supabase.auth.user();
+            const user = supabase.auth.user()
 
             const updates = {
                 id: user.id,
@@ -67,6 +74,7 @@ const Account = ({ session, supabase }) => {
             setError(error.message)
         } finally {
             setLoading(false)
+            navigate('/projects')
         }
     }
 
@@ -99,11 +107,12 @@ const Account = ({ session, supabase }) => {
                         <span className="label-text">Admin</span>
                         <input type="checkbox"
                             className="checkbox checkbox-primary"
-                            // change checkbox to checked if admin === true
+                            checked={isAdmin}
                             onChange={(e) => setIsAdmin(!isAdmin)}
                         />
                     </label>
                     <div>
+                        {error && <p>{error}</p>}
                         <button disabled={loading}>
                             Update Profile
                         </button>
