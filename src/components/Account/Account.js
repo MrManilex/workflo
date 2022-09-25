@@ -31,9 +31,8 @@ const Account = ({ session, supabase }) => {
                 setIsAdmin(data.admin)
             }
             if (data.username !== null) {
-                navigate('/projects')
+                data.admin === true ? navigate('/admin/projects') : navigate('/projects')
             }
-
         } catch (error) {
             setError(error.message)
         } finally {
@@ -43,8 +42,8 @@ const Account = ({ session, supabase }) => {
 
     const updateProfile = async (e) => {
         e.preventDefault()
-        
-        if ( username === null ) {
+
+        if (username === null) {
             setError('Please enter a username')
             return
         }
@@ -71,7 +70,7 @@ const Account = ({ session, supabase }) => {
             setError(error.message)
         } finally {
             setLoading(false)
-            navigate('/projects')
+            isAdmin === true ? navigate('/admin/projects') : navigate('/projects')
         }
     }
 

@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Navbar session={session} supabase={supabase}/>
+      <Navbar session={session} supabase={supabase} />
       {/* routes */}
       <Routes>
 
@@ -28,9 +28,10 @@ function App() {
 
         {/* correct path for viewing ticket... /:project/:ticketId */}
         <Route path='/tickets' element={<Tickets supabase={supabase} />} />
+        <Route path='/projects' element={session ? <Admin supabase={supabase} /> : <Landing supabase={supabase} />} />
 
         {/* admin routes  */}
-        <Route path='/projects' element={session ? <Admin supabase={supabase} /> : <Landing supabase={supabase} />} />
+        <Route path='/admin/projects' element={session ? <Admin supabase={supabase} /> : <Landing supabase={supabase} />} />
       </Routes>
     </>
   )
